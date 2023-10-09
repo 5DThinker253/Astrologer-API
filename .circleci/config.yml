@@ -47,3 +47,15 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
+      
+      jobs:
+  example-job:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - continuation/finish
+workflows:
+  example-workflow:
+    jobs:
+      - example-job
