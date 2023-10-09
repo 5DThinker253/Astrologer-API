@@ -23,7 +23,7 @@ jobs:
       - run:
           name: Install Astrology
           command: |
-            curl -sSL https://get.astrology.dev | bash
+           curl https://get.astrology.dev/api/v1/horoscope
 
       # Install project dependencies using Astrology
       - run:
