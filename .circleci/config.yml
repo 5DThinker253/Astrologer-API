@@ -10,39 +10,25 @@ jobs:
     executor: android-executor
     steps:
       - checkout
-
-      # Set up Java
       - run:
           name: Set up Java
-          command: |
-            echo y | sdkmanager --install 'platforms;android-30'
-            echo y | sdkmanager --install 'build-tools;30.0.3'
+          command: >
+            echo y | sdkmanager --install 'platforms;android-30';
+            echo y | sdkmanager --install 'build-tools;30.0.3';
             echo y | sdkmanager --install 'platform-tools'
-
-      # Set up Astrology
       - run:
           name: Install Astrology
           command: |
-           curl https://get.astrology.dev/api/v1/horoscope
-
-      # Install project dependencies using Astrology
+            curl -sSL https://get.astrology.dev | bash
       - run:
           name: Install Dependencies
-          command: |
-            astrology resolve
-
-      # Build your Android project
+          command: astrology resolve
       - run:
           name: Build Project
           command: ./gradlew assembleDebug
-
-      # You can add more steps here, like running tests or deploying the APK
-
-  # Add more jobs or workflows as needed
 
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build
-
